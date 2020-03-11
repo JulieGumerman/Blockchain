@@ -145,18 +145,28 @@ blockchain = Blockchain()
 
 #     return jsonify(response), 200
 
-@app.route('/mine', methods=['GET'])
+@app.route('/mine', methods=['POST'])
 def mine():
+    data = request.get_json()
     # Run the proof of work algorithm to get the next proof
-    proof = blockchain.proof_of_work(blockchain.last_block)
+    #proof = blockchain.proof_of_work(blockchain.last_block)
+    #proof = data.proof
     # Forge the new Block by adding it to the chain with the proof
-    previous_hash = blockchain.hash(blockchain.last_block)
-    block = blockchain.new_block(proof, previous_hash)
-
-
+    #previous_hash = blockchain.hash(blockchain.last_block)
+    #block = blockchain.new_block(proof, previous_hash)
+    
+    if "proof" not in data or "id" not in data:
+        response = {
+            "Error": "Does not contain both a proof and an id"
+        }
+        return jsonify(response), 200
     response = {
-        'new_block': block
+        data
     }
+
+    # response = {
+    #     'new_block': block
+    # }
 
     return jsonify(response), 200
 
