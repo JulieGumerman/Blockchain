@@ -152,7 +152,7 @@ def mine():
     #proof = blockchain.proof_of_work(blockchain.last_block)
     #proof = data.proof
     # Forge the new Block by adding it to the chain with the proof
-    #previous_hash = blockchain.hash(blockchain.last_block)
+
     #block = blockchain.new_block(proof, previous_hash)
     
     if "proof" not in data or "id" not in data:
@@ -160,15 +160,26 @@ def mine():
             "Error": "Does not contain both a proof and an id"
         }
         return jsonify(response), 200
-    response = {
-        data
-    }
 
-    # response = {
-    #     'new_block': block
-    # }
+        miner_id = data[id]
+        proof = data[proof]
 
-    return jsonify(response), 200
+    block_string = json.dumps(blockchain.last_block, sort_keys=True)
+        
+    if blockchain.valid_proof(block_string, proof):
+        previous_hash = blockchain.hash(blockchain.last_block)
+        block = blockchain.new_block
+
+        response = {
+           'message': 'Yay! You mined a block!!!'
+        }
+
+        return jsonify(response), 200
+    else:
+        response = {
+            'message': 'proof is no good or has already been submitted'
+        }
+        return jsonify(response), 400
 
 
 @app.route('/chain', methods=['GET'])
@@ -183,8 +194,7 @@ def full_chain():
 @app.route('/lastblock', methods=['GET'])
 def last_block():
     response = {
-        "last_block": blockchain.chain[-1],
-        'hi': 'hello'
+        "last_block": blockchain.chain[-1]
     }
     return jsonify(response), 200
     
