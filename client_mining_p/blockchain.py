@@ -161,8 +161,8 @@ def mine():
         }
         return jsonify(response), 200
 
-        miner_id = data[id]
-        proof = data[proof]
+    #miner_id = data[id]
+    proof = data["proof"]
 
     block_string = json.dumps(blockchain.last_block, sort_keys=True)
         
@@ -172,6 +172,7 @@ def mine():
 
         response = {
            'message': 'Yay! You mined a block!!!'
+           #'block': block
         }
 
         return jsonify(response), 200
@@ -191,7 +192,7 @@ def full_chain():
     return jsonify(response), 200
 
 
-@app.route('/lastblock', methods=['GET'])
+@app.route('/last_block', methods=['GET'])
 def last_block():
     response = {
         "last_block": blockchain.chain[-1]

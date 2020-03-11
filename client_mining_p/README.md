@@ -19,12 +19,12 @@ Modify the server we created to:
         * Note that `request` and `requests` both exist in this project
     * [x] Check that 'proof', and 'id' are present
         * [x] return a 400 error using `jsonify(response)` with a 'message'
-* Return a message indicating success or failure.  Remember, a valid proof should fail for all senders except the first.
+* [x] Return a message indicating success or failure.  Remember, a valid proof should fail for all senders except the first.
 
 *Client Mining*
 Create a client application that will:
 * [x] Get the last block from the server
-* Run the `proof_of_work` function until a valid proof is found, validating or rejecting each attempt.  Use a copy of `valid_proof` to assist.
+* [x] Run the `proof_of_work` function until a valid proof is found, validating or rejecting each attempt.  Use a copy of `valid_proof` to assist.
 * Print messages indicating that this has started and finished.
 * [x] Modify it to generate proofs with *6* leading zeroes.
 * [x] Print a message indicating the success or failure response from the server
