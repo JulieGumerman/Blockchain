@@ -17,8 +17,8 @@ Modify the server we created to:
     * [x] It should accept a POST
     * [x] Use `data = request.get_json()` to pull the data out of the POST
         * Note that `request` and `requests` both exist in this project
-    * Check that 'proof', and 'id' are present
-        * return a 400 error using `jsonify(response)` with a 'message'
+    * [x] Check that 'proof', and 'id' are present
+        * [x] return a 400 error using `jsonify(response)` with a 'message'
 * Return a message indicating success or failure.  Remember, a valid proof should fail for all senders except the first.
 
 *Client Mining*
